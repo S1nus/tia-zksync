@@ -37,6 +37,10 @@ async fn main() {
     let height = client.blob_submit(&[blob], None.into()).await.expect("Failed to submit blob");
     
     // Retrieve the merkle blob incluson proof
-    let proof = client.blob_get_proof(height, namespace, blob_commitment).await.expect("Failed to get proof");
-    println!("proof: {:?}", proof);
+    /*
+        Note, these appear to be a series of proofs into the row roots.
+        TODO: include a merkle-range proof of row roots into data root.
+     */
+    let proofs = client.blob_get_proof(height, namespace, blob_commitment).await.expect("Failed to get proof");
+    println!("proofs: {:?}", proofs);
 }
